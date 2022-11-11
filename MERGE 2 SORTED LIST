@@ -1,0 +1,130 @@
+#include <stdio.h>
+#include<stdlib.h>
+struct node{
+    int data;
+    struct node *next;
+}*new,*head1=NULL,*tail1=NULL,*l1,*l2,*head2=NULL,*tail2=NULL;
+struct node *create(struct node *head1)
+{
+    int val,n;
+    do{
+        printf("enter number");
+        scanf("%d",&val);
+        new=(struct node*)malloc(sizeof(struct node));
+        new->data=val;
+        new->next=NULL;
+        if(head1==NULL)
+        {
+            head1=new;
+            tail1=new;
+        }
+        else
+        {
+            tail1->next=new;
+            tail1=new;
+        }
+        printf("enter 1 to continue 0 for exit");
+        scanf("%d",&n);
+        
+    }while(n!=0);
+    return head1;
+}
+void display(struct node *head1)
+{
+    struct node*temp;
+    temp=head1;
+    while(temp!=NULL)
+    {
+        printf("%d\n",temp->data);
+        temp=temp->next;
+    }
+}
+struct node *merge(struct node *list1,struct node*list2)
+{
+    struct node *temp1;
+    struct node  *temp2;
+    temp1=list1;
+    temp2=list2;
+    while(temp1 && temp2)
+    {
+        new=(struct node*)malloc(sizeof(struct node));
+        if(temp1->data<temp2->data)
+        {
+            new->data=temp1->data;
+            new->next=NULL;
+            if(head1==NULL)
+            {
+                head1=new;
+                tail1=new;
+            }
+            else
+            {
+                tail1->next=new;
+                tail1=new;
+            }
+            temp1=temp1->next;
+        }
+        else
+        {
+            new->data=temp2->data;
+            new->next=NULL;
+            if(head1==NULL)
+            {
+                head1=new;
+                tail1=new;
+            }
+            else
+            {
+                tail1->next=new;
+                tail1=new;
+            }
+            temp2=temp2->next;
+        }
+    }
+    for(;temp1!=NULL;temp1=temp1->next)
+    {
+        struct node new=(struct node)malloc(sizeof(struct node));
+        new->data=temp1->data;
+            new->next=NULL;
+            if(head1==NULL)
+            {
+                head1=new;
+                tail1=new;
+            }
+            else
+            {
+                tail1->next=new;
+                tail1=new;
+            }
+        
+    }
+    for(;temp2!=NULL;temp2=temp2->next)
+    {
+        struct node new=(struct node)malloc(sizeof(struct node));
+        new->data=temp2->data;
+            new->next=NULL;
+            if(head1==NULL)
+            {
+                head1=new;
+                tail1=new;
+            }
+            else
+            {
+                tail1->next=new;
+                tail1=new;
+            }
+    }
+    return head1;
+    
+}
+int main()
+{
+    int *a,*b,*c;
+    a=create(l1);
+    display(a);
+    b=create(l2);
+    display(b);
+    c=merge(a,b);
+    display(c);
+}
+output
