@@ -1,0 +1,45 @@
+# DAA-LAB-
+
+#include<iostream>
+#include<vector>
+using namespace std;
+void merge(vector<int>& nums1,int nums1Size,int m,vector<int>& nums2,int nums2Size,int n){
+    int i1=m-1,i2=n-1,i=nums1Size-1;
+    while(i1>=0 && i2>=0){
+        if(nums1[i1]>nums2[i2]){
+            nums1[i--]=nums1[i1--];
+        }
+        else{
+            nums1[i--]=nums2[i2--];
+        }
+    }
+    if(i2>=0){
+        while(i2>=0){
+            nums1[i--]=nums2[i2--];
+        }
+    }
+}
+vector<int>nums1,nums2;
+int main(){
+    int a,b,num1Size,num2Size,m,n,i;
+    printf("enter 1st array");
+    scanf("%d",&num1Size);
+    printf("enter 2st array");
+    scanf("%d",&num2Size);
+    printf("enter number to merge");
+    scanf("%d",&m);
+    n=num2Size;
+    for(i=0;i<num1Size;i++){
+        cin>>a;
+        nums1.push_back(a);
+    }
+    for(i=0;i<num2Size;i++){
+        cin>>b;
+        nums2.push_back(b); 
+    }
+    merge(nums1,num1Size,m,nums2,num2Size,n);
+    for(i=0;i<num1Size;i++){
+        cout<<nums1[i];
+    }
+    return 0;
+}
